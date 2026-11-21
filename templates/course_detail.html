@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ course.title }} - AI Learning System</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
+body { background:#f4f6f9; padding:20px; }
+.navbar { background:#2c3e50; color:white; padding:15px 25px; display:flex; justify-content:space-between; align-items:center; border-radius:10px; margin-bottom:25px; }
+.navbar a { color:white; text-decoration:none; margin-left:15px; font-weight:bold; }
+.container { max-width:800px; margin:auto; background:white; padding:30px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+.container h1 { color:#2c3e50; margin-bottom:10px; }
+.container p { color:#555; line-height:1.6; margin-bottom:10px; }
+.lesson { background:#f8f9fa; padding:15px; border-radius:8px; margin-bottom:10px; }
+.btn { display:inline-block; padding:12px 25px; border-radius:6px; text-decoration:none; font-weight:bold; color:white; margin-top:15px; }
+.btn-enroll { background:#3498db; } .btn-dash { background:#2ecc71; }
+</style>
+</head>
+<body>
+<div class="navbar"><div><b>🎓 AI Learning System</b></div><div><a href="/">Home</a><a href="/courses/">Courses</a><a href="/dashboard/">Dashboard</a><a href="/logout/">Logout</a></div></div>
+<div class="container">
+<h1>{{ course.title }}</h1>
+<p>{{ course.description }}</p>
+<p><b>Instructor:</b> {{ course.instructor }} | <b>Price:</b> ₹{{ course.price }}</p>
+<h2 style="margin:20px 0 10px 0; color:#2c3e50;">Lessons</h2>
+{% for l in lessons %}
+<div class="lesson"><b>{{ l.order }}. {{ l.title }}</b><p>{{ l.content }}</p></div>
+{% empty %}<p>No lessons yet.</p>{% endfor %}
+{% if is_enrolled %}
+<p style="color:green; font-weight:bold; margin-top:15px;">✅ You are enrolled in this course!</p>
+<a href="/dashboard/" class="btn btn-dash">Go to Dashboard</a>
+{% else %}
+<a href="/enroll/{{ course.id }}/" class="btn btn-enroll">Enroll Now</a>
+{% endif %}
+</div>
+</body>
+</html>

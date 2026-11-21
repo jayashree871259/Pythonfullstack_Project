@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f4f6f9; }
+        .layout { display: flex; min-height: 100vh; }
+        .sidebar { width: 240px; background: #2c3e50; color: white; padding: 25px 20px; flex-shrink: 0; }
+        .sidebar h2 { margin-bottom: 30px; font-size: 22px; }
+        .sidebar a { display: block; color: white; text-decoration: none; padding: 12px 10px; border-radius: 6px; margin-bottom: 8px; font-weight: bold; }
+        .sidebar a:hover { background: #34495e; color: #f1c40f; }
+        .main { flex: 1; padding: 25px; }
+        .main h1 { color: #2c3e50; margin-bottom: 20px; }
+        @media (max-width: 700px) {
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout">
+        <div class="sidebar">
+            <h2>🎓 AI Learning</h2>
+            <a href="/">🏠 Home</a>
+            <a href="/dashboard/">📊 Dashboard</a>
+            <a href="/courses/">📚 Courses</a>
+            <a href="/logout/">🚪 Logout</a>
+        </div>
+
+        <div class="main">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

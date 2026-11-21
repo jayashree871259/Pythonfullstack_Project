@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Courses - AI Learning System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f4f6f9; padding: 20px; }
+        .navbar { background: #2c3e50; color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-radius: 10px; margin-bottom: 25px; }
+        .navbar a { color: white; text-decoration: none; margin-left: 15px; font-weight: bold; }
+        .navbar a:hover { color: #f1c40f; }
+        h1 { text-align: center; margin-bottom: 25px; color: #2c3e50; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1100px; margin: auto; }
+        .course-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .course-card h3 { color: #2c3e50; margin-bottom: 10px; }
+        .course-card p { color: #555; margin-bottom: 8px; line-height: 1.5; }
+        .price { color: #27ae60; font-size: 18px; }
+        .btn { display: inline-block; padding: 10px 18px; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: bold; margin-right: 8px; margin-top: 10px; }
+        .btn-enroll { background: #3498db; color: white; }
+        .btn-view { background: #2ecc71; color: white; }
+        .btn-enroll:hover, .btn-view:hover { opacity: 0.85; }
+        .empty { text-align: center; color: #888; font-size: 18px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div><b>🎓 AI Learning System</b></div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/courses/">Courses</a>
+            <a href="/dashboard/">Dashboard</a>
+            <a href="/logout/">Logout</a>
+        </div>
+    </div>
+
+    <h1>📚 All Courses</h1>
+
+    <div class="grid">
+        {% for c in courses %}
+        <div class="course-card">
+            <h3>{{ c.title }}</h3>
+            <p>{{ c.description }}</p>
+            <p><b>Instructor:</b> {{ c.instructor }}</p>
+            <p class="price"><b>Price: ₹{{ c.price }}</b></p>
+            <a href="/course/{{ c.id }}/" class="btn btn-view">View Course</a>
+            <a href="/enroll/{{ c.id }}/" class="btn btn-enroll">Enroll Now</a>
+        </div>
+        {% empty %}
+        <p class="empty">No courses available yet. Please ask Admin to add courses from Admin Panel.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

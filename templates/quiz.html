@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: {{ course.title }} - AI Learning System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f4f6f9; padding: 20px; }
+        .navbar { background: #2c3e50; color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-radius: 10px; margin-bottom: 25px; }
+        .navbar a { color: white; text-decoration: none; margin-left: 15px; font-weight: bold; }
+        .navbar a:hover { color: #f1c40f; }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 25px; }
+        .container { max-width: 800px; margin: auto; }
+        .course-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .course-card p { color: #2c3e50; margin-bottom: 12px; font-size: 16px; }
+        .course-card label { display: block; padding: 10px; margin-bottom: 8px; background: #f8f9fa; border-radius: 6px; cursor: pointer; color: #333; }
+        .course-card label:hover { background: #eaf2f8; }
+        .course-card input[type="radio"] { margin-right: 8px; }
+        .submit-btn { display: block; width: 100%; padding: 14px; background: #2ecc71; color: white; border: none; border-radius: 8px; font-size: 17px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .submit-btn:hover { background: #27ae60; }
+        .empty { text-align: center; color: #888; background: white; padding: 30px; border-radius: 12px; }
+        .back { display: block; text-align: center; margin-top: 20px; color: #3498db; font-weight: bold; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div><b>🎓 AI Learning System</b></div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/courses/">Courses</a>
+            <a href="/dashboard/">Dashboard</a>
+            <a href="/logout/">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>📝 Quiz: {{ course.title }}</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            {% for q in questions %}
+            <div class="course-card">
+                <p><b>Q{{ forloop.counter }}. {{ q.question_text }}</b></p>
+                <label><input type="radio" name="q_{{ q.id }}" value="{{ q.option1 }}" required> {{ q.option1 }}</label>
+                <label><input type="radio" name="q_{{ q.id }}" value="{{ q.option2 }}"> {{ q.option2 }}</label>
+                <label><input type="radio" name="q_{{ q.id }}" value="{{ q.option3 }}"> {{ q.option3 }}</label>
+                <label><input type="radio" name="q_{{ q.id }}" value="{{ q.option4 }}"> {{ q.option4 }}</label>
+            </div>
+            {% empty %}
+            <p class="empty">No questions available for this course yet.</p>
+            {% endfor %}
+
+            {% if questions %}
+            <button type="submit" class="submit-btn">Submit Quiz ✅</button>
+            {% endif %}
+        </form>
+
+        <a href="/dashboard/" class="back">← Back to Dashboard</a>
+    </div>
+
+</body>
+</html>
